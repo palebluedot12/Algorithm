@@ -4,17 +4,16 @@
 
 using namespace std;
 
-int at(int, int);
+long long at(long long, long long);
 
 int main(){
-	int a, b;
-	int result;
+	long long a, b;
 	cin >> a >> b;
 	cout << at(a, b);
 
 	return 0;
 }
 
-int at(int a, int b) {
+long long at(long long a, long long b) {
 	return (a + b) * (a - b);
 }
