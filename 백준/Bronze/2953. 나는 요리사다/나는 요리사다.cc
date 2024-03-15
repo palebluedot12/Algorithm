@@ -6,9 +6,7 @@ using namespace std;
 
 int main(void){
     
-    int sum2[5];
-    int score;
-    
+    int score;    
     int max = 0;
     int max_idx;
 
@@ -20,22 +18,21 @@ int main(void){
             sum += score;
         }
 
-        sum2[i] = sum;
 
         if (i == 0) {
             max_idx = i;
-            max = sum2[i];
+            max = sum;
         }
         else {
-            if (sum2[i] >= max){
+            if (sum >= max){
                 max_idx = i;
-                max = sum2[i];
+                max = sum;
             }
         }
 
 
     }
 
-    cout << max_idx + 1 << ' ' << sum2[max_idx];
+    cout << max_idx + 1 << ' ' << max;
 
 }
