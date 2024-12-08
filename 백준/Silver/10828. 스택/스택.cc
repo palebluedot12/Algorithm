@@ -1,67 +1,34 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
-struct Mystack {
-    int last = -1;
-    int arr[10000];
-
-    void push(int data){
-        arr[++last] = data;
+int main(void) {
+  ios::sync_with_stdio(0);
+  cin.tie(0);
+  int n;
+  cin >> n;
+  stack<int> S;
+  while(n--){ // n번 반복
+    string c;
+    cin >> c;
+    if(c=="push"){
+      int t;
+      cin >> t;
+      S.push(t);
     }
-
-    int pop(){
-        if (empty()) return -1;
-        return arr[last--];
+    else if(c=="pop"){
+      if(S.empty()) cout << -1 << '\n';
+      else{
+        cout << S.top() << '\n';
+        S.pop();
+      }
     }
-
-    int size(){
-        if (empty()) return 0; 
-        return last + 1;
+    else if(c=="size")
+      cout << S.size() << '\n';
+    else if(c=="empty")
+      cout << (int)S.empty() << '\n';
+    else{ // top
+      if(S.empty()) cout << -1 << '\n';
+      else cout << S.top() << '\n';
     }
-
-    bool empty(){
-        if (last < 0) return true;
-        else return false;
-    }
-
-    int top(){
-        if (empty()) return -1;
-        return arr[last];
-    }
-};
-
-
-int main(void){
-    Mystack s;
-
-    int n;
-    cin >> n;
-
-    for (int i = 0; i < n; i++){
-        string order;
-        cin >> order;
-
-        if (order == "push"){
-            int data;
-            cin >> data;
-            s.push(data);
-        }
-
-        else if (order == "pop"){
-            cout << s.pop() << '\n';
-        }
-
-        else if (order == "size"){
-            cout << s.size() << '\n';
-        }
-
-        else if (order == "empty"){
-            cout << s.empty() << '\n';
-        }
-
-        else if (order == "top"){
-            cout << s.top() << '\n';
-        }
-    }
-
+  }
 }
