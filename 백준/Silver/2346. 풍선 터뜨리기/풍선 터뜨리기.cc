@@ -1,5 +1,5 @@
 #include <iostream>
-#include <deque>
+#include <vector>
 
 using namespace std;
 
@@ -7,33 +7,32 @@ int main() {
     int N;
     cin >> N;
 
-    deque<pair<int, int>> dq; // (풍선 번호, 이동 값)
+    vector<pair<int, int>> balloons(N);  // (풍선 번호, 이동 값)
 
     for (int i = 0; i < N; i++) {
-        int move;
-        cin >> move;
-        dq.push_back({i + 1, move});
+        cin >> balloons[i].second;
+        balloons[i].first = i + 1;
     }
 
-    while (!dq.empty()) {
-        // 현재 풍선 터뜨리기
-        auto [idx, move] = dq.front();
-        dq.pop_front();
-        cout << idx << " ";
+    int cur = 0; // 현재 터뜨릴 풍선의 인덱스
 
-        if (dq.empty()) break; // 마지막 풍선 터뜨렸으면 종료
+    for (int i = 0; i < N; i++) {
+        int move = balloons[cur].second;  
+        cout << balloons[cur].first << " ";
 
-        // 오른쪽또는 왼쪽으로 이동
+        // 현재 풍선 제거
+        balloons.erase(balloons.begin() + cur);
+
+        if (balloons.empty()) break;  // 마지막 풍선이면 종료
+
+        // 다음 이동 위치 계산
+        int new_size = balloons.size();
+
         if (move > 0) {
-            for (int i = 0; i < move - 1; i++) {
-                dq.push_back(dq.front());
-                dq.pop_front();
-            }
+            cur = (cur + (move - 1)) % new_size;  // 오른쪽 이동
         } else {
-            for (int i = 0; i < abs(move); i++) {
-                dq.push_front(dq.back());
-                dq.pop_back();
-            }
+            cur = (cur + move) % new_size;  // 왼쪽 이동
+            if (cur < 0) cur += new_size;  // 음수면 보정!
         }
     }
 
