@@ -2,7 +2,7 @@
 
 using namespace std;
 
-long long tree[1000005]; // 나무
+int tree[1000005]; // 나무
 
 int n;
 long long m;
