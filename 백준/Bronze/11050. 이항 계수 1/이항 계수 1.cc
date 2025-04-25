@@ -1,18 +1,16 @@
-#include <iostream>
-
+#include <bits/stdc++.h>
 using namespace std;
 
-int factorial(int n) {
-    if (n == 0) return 1;
-    return n * factorial(n - 1);
-}
+//nCk
+int main()
+{
+	int n, k;
+	int ret = 1;
+	cin >> n >> k;
+	
+	for (int i = n; i >= 1; i--) ret *= i;
+	for (int i = (n - k); i >= 1; i--) ret /= i;
+	for (int i = k; i >= 1; i--) ret /= i;
 
-int main() {
-    int N, K;
-    cin >> N >> K;
-
-    // 이항 계수 공식
-    cout << factorial(N) / (factorial(K) * factorial(N - K)) << endl;
-
-    return 0;
+	cout << ret;
 }
