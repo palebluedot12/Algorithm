@@ -1,26 +1,37 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <string>
 using namespace std;
 
-// 문자열 구간에 해당 알파벳이 몇 번 등장하는가?
+int prefix[26][200001]; // i 번째 알파벳의 j번까지 누적 등장 횟수
 
-int main()
-{
-	string input; // input 길이는 2000자 이하
-	int q; // q는 20만까지
-	cin >> input;
-	cin >> q;
+int main() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
 
-	while (q--)
-	{
-		int l, r;
-		char alpha;
-		int result = 0;
-		cin >> alpha >> l >> r;
+    string s;
+    cin >> s;
+    int n = s.size();
 
-		for (int i = l; i <= r; i++)
-		{
-			if (alpha == input[i]) result++;
-		}
-		cout << result << '\n';
-	}
+    for (int i = 0; i < n; ++i) 
+    {
+        int c = s[i] - 'a';
+        for (int j = 0; j < 26; ++j) 
+        {
+            prefix[j][i + 1] = prefix[j][i]; // 이전까지 값 복사
+        }
+        prefix[c][i + 1]++; // 해당 문자
+    }
+
+    int q;
+    cin >> q;
+
+    while (q--) {
+        char ch;
+        int l, r;
+        cin >> ch >> l >> r;
+        int c = ch - 'a';
+        cout << prefix[c][r + 1] - prefix[c][l] << '\n';
+    }
+
+    return 0;
 }
