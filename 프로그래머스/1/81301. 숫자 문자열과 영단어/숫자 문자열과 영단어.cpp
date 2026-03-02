@@ -4,20 +4,21 @@
 using namespace std;
 
 int solution(string s) {
-    vector<string> words = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
-    
-    // 각 단어를 순차적으로 처리하여 문자열에서 숫자로 변환
-    for (int i = 0; i < words.size(); i++) {
-        string word = words[i];
-        int pos = s.find(word);
-        
-        // 단어가 문자열에 존재하는 동안 반복해서 교체
-        while (pos != string::npos) {
-            s.replace(pos, word.size(), to_string(i)); // 단어를 해당 숫자로 교체
-            pos = s.find(word, pos + 1); // 교체 후 다시 찾기
+   // 숫자에 대응하는 영단어 배열 정의
+    string words[] = {
+        "zero", "one", "two", "three", "four", 
+        "five", "six", "seven", "eight", "nine"
+    };
+
+    for (int i = 0; i < 10; i++) {
+        size_t pos = 0;
+        while ((pos = s.find(words[i], pos)) != string::npos) {
+            s.replace(pos, words[i].length(), to_string(i));
+            
+            pos += 1;
         }
     }
-    
-    // 최종적으로 변환된 문자열을 정수로 반환
+
     return stoi(s);
 }
+
